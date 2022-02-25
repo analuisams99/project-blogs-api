@@ -13,9 +13,17 @@ module.exports = {
     code: BAD_REQUEST,
     message: '"email" must be a valid email',
   },
+  emptyEmail: {
+    code: BAD_REQUEST,
+    message: '"email" is not allowed to be empty',
+  },
   requiredEmail: {
     code: BAD_REQUEST,
     message: '"email" is required',
+  },
+  emptyPassword: {
+    code: BAD_REQUEST,
+    message: '"password" is not allowed to be empty',
   },
   passwordInvalid: {
     code: BAD_REQUEST,
@@ -28,5 +36,9 @@ module.exports = {
   registeredUser: {
     code: CONFLICT,
     message: 'User already registered',
+  },
+  loginError: {
+    code: BAD_REQUEST,
+    message: 'Invalid fields',
   },
 };
