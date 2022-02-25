@@ -1,6 +1,7 @@
+const { User } = require('../models'); 
 const { 
   nameInvalid, requiredEmail, emailInvalid, passwordInvalid,
-  requiredPassword, emptyEmail, emptyPassword, 
+  requiredPassword, emptyEmail, emptyPassword, userDoesNotExist, 
 } = require('../utils/errors');
 
 const MIN_NAME_LENGTH = 8;
@@ -45,6 +46,14 @@ const validatePassword = (password) => {
   }
 };
 
+const UserExistValidation = async ({ id }) => {
+  const user = await User.findByPk(id);
+  if (user === null) {
+    const { code, message } = userDoesNotExist;
+    return { code, message };
+  }
+};
+
 const userValidation = ({ displayName, email, password }) => {
   const nameError = validateName(displayName);
   if (nameError) return nameError;
@@ -66,4 +75,5 @@ const loginValidation = ({ email, password }) => {
 module.exports = {
   userValidation,
   loginValidation,
+  UserExistValidation,
 };

@@ -1,6 +1,7 @@
 // const CREATED = 201;
 const BAD_REQUEST = 400;
 const UNAUTHORIZED = 401;
+const NOT_FOUND = 404;
 const CONFLICT = 409;
 // const INTERNAL_SERVER_ERROR = 500;
 
@@ -48,5 +49,9 @@ module.exports = {
   tokenInvalid: {
     code: UNAUTHORIZED,
     message: 'Expired or invalid token',
+  },
+  userDoesNotExist: {
+    code: NOT_FOUND,
+    message: 'User does not exist',
   },
 };
