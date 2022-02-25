@@ -20,6 +20,18 @@ const create = async ({ displayName, email, password, image }) => {
   };
 };
 
+const getAll = async () => {
+  const users = await User.findAll();
+  
+  return {
+    code: 200,
+    usersArray: {
+      ...users,
+    },
+  };
+};
+
 module.exports = {
   create,
+  getAll,
 };
