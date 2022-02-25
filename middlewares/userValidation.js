@@ -1,9 +1,9 @@
-const { validateName } = require('../schemas/userSchema');
+const { userValidation } = require('../schemas/userSchema');
 
 const validateUser = async (req, res, next) => {
-  const { displayName } = req.body;
+  const { displayName, email, password } = req.body;
   
-  const response = await validateName(displayName);
+  const response = await userValidation({ displayName, email, password });
 
   if (response) {
     const { code, message } = response;
