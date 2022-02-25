@@ -54,4 +54,8 @@ module.exports = {
     code: NOT_FOUND,
     message: 'User does not exist',
   },
+  nameIsRequired: {
+    code: BAD_REQUEST,
+    message: '"name" is required',
+  },
 };
