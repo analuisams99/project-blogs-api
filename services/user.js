@@ -31,7 +31,17 @@ const getAll = async () => {
   };
 };
 
+const getById = async ({ id }) => {
+  const user = await User.findByPk(id);
+
+  return {
+    code: 200,
+    user,
+  };
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };
