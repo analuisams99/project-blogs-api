@@ -1,5 +1,5 @@
 const { User, Post, Category, PostCategory } = require('../models');
-const { postDoesNotExist } = require('../utils/errors');
+const { postDoesNotExist, unauthorized } = require('../utils/errors');
 const { verifyToken } = require('../utils/generateToken');
 
 const create = async (title, content, categoryIds, token) => {
@@ -52,8 +52,34 @@ const getById = async (id) => {
   };
 };
 
+const update = async ({ title, content }, id, token) => {
+  const { data } = verifyToken(token); 
+  const user = await User.findOne({ where: { email: data } });
+
+  const postUser = await Post.findByPk(id);
+
+  if (user.id !== postUser.userId) {
+    const { code, message } = unauthorized;
+    return { code, message };  
+  }
+
+  await Post.update({ title, content }, { where: { id } });
+  const updatedPost = await Post.findOne({
+    where: { id },
+    include: [
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+  
+  return {
+    code: 200,
+    posts: updatedPost,
+  };
+};
+
 module.exports = {
   create,
   getAll,
   getById,
+  update,
 };

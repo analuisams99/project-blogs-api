@@ -33,8 +33,23 @@ const getById = rescue(async (req, res) => {
   return res.status(code).json(post);
 });
 
+const update = rescue(async (req, res) => {
+  const token = req.headers.authorization;
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  const { code, message, posts } = await postService.update({ title, content }, id, token);
+
+  if (message) {
+    return res.status(code).json({ message });
+  }
+
+  return res.status(code).json(posts);
+});
+
 module.exports = {
   create,
   getAll,
   getById,
+  update,
 };
