@@ -73,5 +73,9 @@ module.exports = {
   categoryIdsNotFound: {
     code: BAD_REQUEST,
     message: '"categoryIds" not found',
-  },  
+  },
+  postDoesNotExist: {
+    code: NOT_FOUND,
+    message: 'Post does not exist',
+  },
 };
