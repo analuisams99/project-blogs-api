@@ -77,9 +77,33 @@ const update = async ({ title, content }, id, token) => {
   };
 };
 
+const remove = async (id, token) => {
+  const { data } = verifyToken(token); 
+
+  const user = await User.findOne({ where: { email: data } });
+  const postUser = await Post.findOne({ where: { id } });
+
+  if (!postUser) {
+    const { code, message } = postDoesNotExist;
+    return { code, message };
+  }
+  
+  if (user.id !== postUser.dataValues.userId) {
+    const { code, message } = unauthorized;
+    return { code, message };  
+  }
+
+  await Post.destroy({ where: { id } });
+
+  return {
+    code: 204,
+  };
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  remove,
 };

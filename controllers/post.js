@@ -47,9 +47,23 @@ const update = rescue(async (req, res) => {
   return res.status(code).json(posts);
 });
 
+const remove = rescue(async (req, res) => {
+  const token = req.headers.authorization;
+  const { id } = req.params;
+
+  const { code, message } = await postService.remove(id, token);
+
+  if (message) {
+    return res.status(code).json({ message });
+  }
+
+  return res.status(code).end();
+});
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  remove,
 };
