@@ -58,4 +58,20 @@ module.exports = {
     code: BAD_REQUEST,
     message: '"name" is required',
   },
+  titleIsRequired: {
+    code: BAD_REQUEST,
+    message: '"title" is required',
+  },
+  contentIsRequired: {
+    code: BAD_REQUEST,
+    message: '"content" is required',
+  },
+  categoryIdsIsRequired: {
+    code: BAD_REQUEST,
+    message: '"categoryIds" is required',
+  },
+  categoryIdsNotFound: {
+    code: BAD_REQUEST,
+    message: '"categoryIds" not found',
+  },  
 };

@@ -10,7 +10,7 @@ const verifyLogin = async ({ email, password }) => {
     return { code, message };
   }
 
-  const token = createToken(password);
+  const token = createToken(email);
 
   return {
     code: 200,

@@ -12,7 +12,7 @@ const create = async ({ displayName, email, password, image }) => {
 
   await User.create({ displayName, email, password, image });
 
-  const token = createToken(password);
+  const token = createToken(email);
 
   return {
     code: 201,
