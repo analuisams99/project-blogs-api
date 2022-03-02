@@ -1,4 +1,4 @@
-const { User, Post, PostCategory } = require('../models');
+const { User, Post, Category, PostCategory } = require('../models');
 const { verifyToken } = require('../utils/generateToken');
 
 const create = async (title, content, categoryIds, token) => {
@@ -17,6 +17,21 @@ const create = async (title, content, categoryIds, token) => {
   };
 };
 
+const getAll = async () => {
+  const allPosts = await Post.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { exclude: [] } },
+    ],
+  });
+
+  return {
+    code: 200,
+    posts: allPosts,
+  };
+};
+
 module.exports = {
   create,
+  getAll,
 };
