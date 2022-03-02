@@ -78,4 +78,12 @@ module.exports = {
     code: NOT_FOUND,
     message: 'Post does not exist',
   },
+  catCannotBeEdited: {
+    code: BAD_REQUEST,
+    message: 'Categories cannot be edited',
+  },
+  unauthorized: {
+    code: UNAUTHORIZED,
+    message: 'Unauthorized user',
+  },
 };
