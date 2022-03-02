@@ -28,8 +28,15 @@ const getById = rescue(async (req, res) => {
   return res.status(code).json(user);
 });
 
+const remove = rescue(async (req, res) => {
+  const token = req.headers.authorization;
+  const { code } = await userService.remove(token);
+  return res.status(code).end();
+});
+
 module.exports = {
   create,
   getAll,
   getById,
+  remove,
 };

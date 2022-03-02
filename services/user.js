@@ -1,6 +1,6 @@
-const { User } = require('../models');
+const { User, Post } = require('../models');
 const { registeredUser } = require('../utils/errors');
-const { createToken } = require('../utils/generateToken');
+const { createToken, verifyToken } = require('../utils/generateToken');
 
 const create = async ({ displayName, email, password, image }) => {
   const alreadyExist = await User.findOne({ where: { email } });
@@ -40,8 +40,19 @@ const getById = async ({ id }) => {
   };
 };
 
+const remove = async (token) => {
+  const { data } = verifyToken(token); 
+  const user = await User.findOne({ where: { email: data } });
+
+  await Post.destroy({ where: { id: user.id } });
+  return { 
+    code: 204,
+  };
+};
+
 module.exports = {
   create,
   getAll,
   getById,
+  remove,
 };
