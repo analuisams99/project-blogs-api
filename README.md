@@ -13,7 +13,7 @@ Desenvolvi e testei uma API para um Blog (com o Sequelize), além de um banco de
 ## Acessando o repositório:
 
 1. Clone o repositório
-  * `git clone git@github.com:analuisams99/project-blogs-api.git.
+  * `git clone git@github.com:analuisams99/project-blogs-api.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd project-blogs-api`
 
